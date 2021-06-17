@@ -18,6 +18,7 @@ function App() {
       localStorage.setItem("token", token);
       setToken(token);
       MyBooklistApi.token = token;
+      console.log(token);
       return true;
     }
     catch(e){
@@ -26,9 +27,8 @@ function App() {
   }
 
   async function signupUser(username, password, firstName){
-    console.log("Made it to sign up function");
     try{
-      let token = await MyBooklistApi.signup(firstName, username, password);
+      let token = await MyBooklistApi.signup(username, password, firstName);
       localStorage.setItem("token", token);
       setToken(token);
       MyBooklistApi.token = token;
@@ -37,6 +37,24 @@ function App() {
     catch(e){
       return e;
     }
+  }
+  async function addBook(isbn, title, author, bestsellersDate, type, booklistId, username){
+    let result = await MyBooklistApi.addBookToList(isbn, title, author, bestsellersDate, type, booklistId, username);
+    // setUser(user.booklists.[booklistId].books.push(result.book));
+  }
+
+  async function removeBook(username, password, firstName){
+    console.log("in remove function");
+    // try{
+    //   let token = await MyBooklistApi.signup(username, password, firstName);
+    //   localStorage.setItem("token", token);
+    //   setToken(token);
+    //   MyBooklistApi.token = token;
+    //   return true;
+    // }
+    // catch(e){
+    //   return e;
+    // }
   }
 
   function logoutUser(){
@@ -64,7 +82,7 @@ function App() {
       <BrowserRouter>
       <UserContext.Provider value={user}>
       <NavBar logoutUser={logoutUser}/>
-      <Routes user={user} signupUser = {signupUser} loginUser={loginUser}/>
+      <Routes user={user} signupUser = {signupUser} loginUser={loginUser} removeBook={removeBook} addBook={addBook}/>
       </UserContext.Provider>
       </BrowserRouter>
     </div>

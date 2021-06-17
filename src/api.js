@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+// const BASE_URL = "https://book-wishlists.herokuapp.com";
 
 // API Class - Static class tying together methods used to get/send to to the API.
 
@@ -27,36 +28,20 @@ class MyBooklistApi {
 
   // Individual API routes
 
-  /** Get details on a company by handle. */
+  /** Get details on a book  */
 
-//   static async getCompany(handle) {
-//     let res = await this.request(`companies/${handle}`);
-//     return res.company;
-//   }
+  static async getBook(type, date, isbn, username) {
+    let res = await this.request(`books/${type}/${date}/${isbn}/${username}`);
+    return res.bookDetails;
+  }
 
-//  /** Get all companies. */
-//   static async getCompanies() {
-//     let res = await this.request(`companies`);
-//     return res.companies;
-//   }
+  /** Add book to a booklist  */
 
-//     /** Get companies with search term*/
-//    static async getCompaniesSearch(searchTerm) {
-//     let res = await this.request(`companies?name=${searchTerm}`);
-//     return res.companies;
-//   }
-
-//    /** Get all jobs. */
-//    static async getJobs() {
-//     let res = await this.request(`jobs`);
-//     return res.jobs;
-//   }
-
-//   /** Getjobs with search term. */
-//   static async getJobsSearch(searchTerm) {
-//     let res = await this.request(`jobs?title=${searchTerm}`);
-//     return res.jobs;
-//   }
+  static async addBookToList(isbn, title, author, bestsellersDate, type, booklistId, username) {
+    let bookData = {isbn:isbn, title:title, author:author, bestsellersDate:bestsellersDate, type:type}
+    let res = await this.request(`books/${username}/${booklistId}`, bookData, "post");
+    return res.book;
+  }
 
   /** Login*/
   static async login(username, password) {
@@ -65,8 +50,8 @@ class MyBooklistApi {
   }
 
   /** Sign up*/
-  static async signup(firstName, username, password) {
-    let res = await this.request("auth/register", {firstName:firstName, username:username, password:password}, "post");
+  static async signup(username, password, firstName) {
+    let res = await this.request("auth/register", {username:username, password:password, firstName:firstName}, "post");
     return res.token;
   }
 

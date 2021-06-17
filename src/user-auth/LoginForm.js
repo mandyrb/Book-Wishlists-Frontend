@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import "./LoginForm.css";
 
 function LoginForm({loginUser}){
-    const initial_state = {username: "", password: ""}
+    const initial_state = {usernameLogin: "", passwordLogin: ""}
     const [formData, setFormData] = useState(initial_state);
     const [invalidMessage, setInvalidMessage] = useState(false); 
     const history = useHistory(); 
@@ -19,7 +19,7 @@ function LoginForm({loginUser}){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let login = await loginUser(formData.username, formData.password);
+        let login = await loginUser(formData.usernameLogin, formData.passwordLogin);
         if (login === true){
             history.push('/');
         }
@@ -34,13 +34,13 @@ function LoginForm({loginUser}){
                 <Col xs={10}>
                 <br></br>
                 <FormGroup>
-                <Label style={{marginBottom:"10px"}} htmlFor="username">Username</Label>
-                <Input type="text" name="username" id="username" onChange={handleChange}/>
+                <Label style={{marginBottom:"10px"}} htmlFor="usernameLogin">Username</Label>
+                <Input type="text" name="usernameLogin" id="usernameLogin" onChange={handleChange}/>
                 </FormGroup>
                 <br></br>
                 <FormGroup>
-                <Label style={{marginBottom:"10px"}} htmlFor="password">Password</Label>
-                <Input type="password" name="password" id="password" onChange={handleChange}/>
+                <Label style={{marginBottom:"10px"}} htmlFor="passwordLogin">Password</Label>
+                <Input type="password" name="passwordLogin" id="passwordLogin" onChange={handleChange}/>
                 </FormGroup>
                 <br></br>
                 <FormGroup>

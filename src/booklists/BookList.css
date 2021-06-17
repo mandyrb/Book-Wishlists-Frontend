@@ -1,0 +1,13 @@
+.booklists-list {
+	margin: auto;
+	width: 70vw;
+}
+
+.book-card {
+	text-align: left;
+	margin-bottom: 10px;
+}
+
+.book-card-title {
+	font-weight: bold;
+}

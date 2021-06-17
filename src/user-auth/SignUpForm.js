@@ -23,7 +23,7 @@ function SignUpForm({signupUser}){
             setInvalidMessage("All fields are required");
             return;
         }
-        let newUser = await signupUser(formData.firstName, formData.username, formData.password);
+        let newUser = await signupUser(formData.username, formData.password, formData.firstName);
         if (newUser === true){
             history.push('/');
         }
