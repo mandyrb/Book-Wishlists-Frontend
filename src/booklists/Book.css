@@ -1,15 +1,18 @@
-/* .job-list {
-	margin: auto;
-	width: 70vw;
+.book-image {
+	height: 50vw;
+	width: 35vw;
+	margin-bottom: 2vw;
 }
 
-.company-heading {
-	margin: auto;
-	margin-top: 30px;
-	width: 70vw;
+.books-on-lists {
 	text-align: left;
 }
 
-.apply-button {
-	display: inline-block;
-} */
+.add-remove-button {
+	float: right;
+	margin-top: 0;
+}
+
+.on-list-title {
+	padding-bottom: 2vw;
+}

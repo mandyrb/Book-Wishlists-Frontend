@@ -15,7 +15,7 @@ function NavBar({logoutUser}){
           {user ? 
             <>
               <NavItem>
-                <NavLink className="nav-link" to="/">Search Books</NavLink>
+                <NavLink className="nav-link" to="/booklists">My Lists</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink className="nav-link" to="/" onClick={logoutUser}>Logout {user.firstName}</NavLink>
@@ -23,12 +23,6 @@ function NavBar({logoutUser}){
             </>
             :
             <>
-              {/* <NavItem>
-                <NavLink className="nav-link" to="/">Login</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink className="nav-link" to="/">Sign Up</NavLink>
-              </NavItem> */}
             </>
           }
           </Nav>

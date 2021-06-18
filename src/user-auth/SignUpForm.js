@@ -38,7 +38,7 @@ function SignUpForm({signupUser}){
                 <br></br>
                 <FormGroup>
                 <Label style={{marginBottom:"10px"}} htmlFor="firstName">First Name</Label>
-                <Input type="text" name="firstName" id="firstName" onChange={handleChange}/>
+                <Input data-testid="signup-name" type="text" name="firstName" id="firstName" onChange={handleChange}/>
                 </FormGroup>
                 <br></br>
                 <FormGroup>

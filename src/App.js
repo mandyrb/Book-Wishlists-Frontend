@@ -5,12 +5,14 @@ import NavBar from "./routes-nav/NavBar";
 import MyBooklistApi from "./api";
 import './App.css';
 import UserContext from "./UserContext";
+import BooksContext from "./BooksContext";
 import jwt from "jsonwebtoken";
 
 function App() {
 
   const[token, setToken] = useState(null);
   const[user, setUser] = useState(null);
+  const[books, setBooks] = useState(null);
 
   async function loginUser(username, password){
     try{
@@ -18,7 +20,6 @@ function App() {
       localStorage.setItem("token", token);
       setToken(token);
       MyBooklistApi.token = token;
-      console.log(token);
       return true;
     }
     catch(e){
@@ -38,28 +39,68 @@ function App() {
       return e;
     }
   }
-  async function addBook(isbn, title, author, bestsellersDate, type, booklistId, username){
-    let result = await MyBooklistApi.addBookToList(isbn, title, author, bestsellersDate, type, booklistId, username);
-    // setUser(user.booklists.[booklistId].books.push(result.book));
+
+  // adapted from StackOverflow 6/18 https://stackoverflow.com/questions/43744312/react-js-get-current-date
+  function getCurrentDate(){
+    let newDate = new Date()
+    let date = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
+    return `${year}-${month<10?`0${month}`:`${month}`}-${date}`
   }
 
-  async function removeBook(username, password, firstName){
-    console.log("in remove function");
-    // try{
-    //   let token = await MyBooklistApi.signup(username, password, firstName);
-    //   localStorage.setItem("token", token);
-    //   setToken(token);
-    //   MyBooklistApi.token = token;
-    //   return true;
-    // }
-    // catch(e){
-    //   return e;
-    // }
+  async function getBooks(){
+    console.log("in getBooks function")
+    if(!books){
+      let result = await MyBooklistApi.bookSearch("fiction", getCurrentDate(), user.username);
+      setBooks(result);
+    }
+  }
+
+  async function getBooksWithSearch(type, date) {
+    try{
+      let result = await MyBooklistApi.bookSearch(type, date, user.username);
+      setBooks(result);
+      return true;
+    }
+    catch(e){
+      return e;
+    }
+  }
+
+  async function addBook(isbn, title, author, bestsellersDate, type, booklistId, username){
+    await MyBooklistApi.addBookToList(isbn, title, author, bestsellersDate, type, booklistId, username);
+    const tokenFromLocalStorage = localStorage.getItem("token");
+    getUserDetails(tokenFromLocalStorage);
+  }
+
+  async function removeBook(username, booklistId, isbn){
+    await MyBooklistApi.removeBookFromList(username, booklistId, isbn);
+    const tokenFromLocalStorage = localStorage.getItem("token");
+    getUserDetails(tokenFromLocalStorage);
+  }
+
+  async function addList(name, description, book, isbn, bestsellersDate, type){
+    try{
+      let booklistId = (await MyBooklistApi.addBooklist(name, description, user.username)).id;
+      await addBook(isbn, book.title, book.author, bestsellersDate, type, booklistId, user.username);
+      return true;
+    }
+    catch (e){
+      return e;
+    }
+  }
+
+  async function deleteList(id){
+    let result = await MyBooklistApi.deleteBooklist(id, user.username);
+    console.log("in delete list function");
+    // getUserDetails(tokenFromLocalStorage);
   }
 
   function logoutUser(){
     setToken(null);
     setUser(null);
+    setBooks(null);
     localStorage.removeItem("token");
   }
 
@@ -77,12 +118,20 @@ function App() {
     }
   },[token]);
 
+      // useEffect(() => {
+    //     getBooks();
+    // }, []);
+
   return (
     <div className="App">
       <BrowserRouter>
       <UserContext.Provider value={user}>
+      <BooksContext.Provider value={books}>
       <NavBar logoutUser={logoutUser}/>
-      <Routes user={user} signupUser = {signupUser} loginUser={loginUser} removeBook={removeBook} addBook={addBook}/>
+      <Routes user={user} signupUser = {signupUser} loginUser={loginUser} 
+            removeBook={removeBook} addBook={addBook} deleteList={deleteList}
+            getBooks={getBooks} addList={addList} getBooksWithSearch={getBooksWithSearch}/>
+      </BooksContext.Provider>
       </UserContext.Provider>
       </BrowserRouter>
     </div>

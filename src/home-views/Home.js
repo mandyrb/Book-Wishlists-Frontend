@@ -1,13 +1,13 @@
 import React, {useContext} from "react";
 import {Jumbotron, Card, CardBody} from "reactstrap";
-import UserContext from "./UserContext";
-import LoginForm from "./user-auth/LoginForm";
-import SignUpForm from "./user-auth/SignUpForm";
-import "./user-auth/LoginForm.css";
+// import UserContext from "./UserContext";
+import LoginForm from "../user-auth/LoginForm";
+import SignUpForm from "../user-auth/SignUpForm";
+// import "../user-auth/LoginForm.css";
 import "./Home.css";
 
 function Home({loginUser, signupUser}){
-    const user = useContext(UserContext);
+    // const user = useContext(UserContext);
     return(
     <div>
         <div>

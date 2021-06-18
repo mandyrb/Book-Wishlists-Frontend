@@ -1,43 +1,46 @@
-import React, {useState, useEffect, useContext} from "react";
-import {Card, CardBody, CardTitle, CardText, ListGroup, Button, Form} from "reactstrap";
-// import LoadingSpinner from "../LoadingSpinner";
+import React, {useContext} from "react";
+import {Card, CardBody, CardTitle, CardText, ListGroup, Button, Form, Jumbotron} from "reactstrap";
 import { useHistory } from 'react-router-dom';
 import "./BookList.css";
 import UserContext from "../UserContext";
 
-function BookList(){
+function BookList({deleteList}){
     const user = useContext(UserContext);
     const history = useHistory(); 
 
-    // async function getCompaniesWithSearch(searchTerm) {
-    //     let result = await JoblyApi.getCompaniesSearch(searchTerm);
-    //     setCompanies(result);
-    //     return result.length;
-    // }
-
-    // const handleSubmit = async (book) => {
-    //     history.push(`/book/${book.type}/${book.bestsellersDate}/${book.isbn}`);
-    // }
-
-    const handleSubmit = async (book) => {
+    const handleSubmitBook = async (book) => {
         history.push(`/book/${book.isbn}`);
+    }
+
+    const handleSubmitList = async (id) => {
+        await deleteList(id);
+        history.push('/booklists');
     }
 
     return(
         <div>
-            {/* <CompanySearchForm search={getCompaniesWithSearch}/> */}
+            <div>
+                <Jumbotron>
+                    <h1 className="display-3">Book Wishlists</h1>
+                    <p className="lead">Check out your booklists and find something fun to read!</p>
+                </Jumbotron>
+            </div>
             <ListGroup className = "booklists-list">
             {user.booklists.map(list => (
                 <div key={list.id}>
                 <h3>{list.name}</h3>
                 <h5>{list.description}</h5>
+                <Form onSubmit={() => handleSubmitList(list.id)}>
+                    <Button >Delete booklist</Button>
+                </Form>
+                <br></br>
                 {list.books.map(book => (
                 <div key={book.isbn}>
                     <Card className = "book-card">
                     <CardBody>
                         <CardTitle className="book-card-title">{book.title}</CardTitle>
                         <CardText>{book.author}</CardText>
-                        <Form onSubmit={() => handleSubmit(book)}>
+                        <Form onSubmit={() => handleSubmitBook(book)}>
                             <Button >View Book Details</Button>
                         </Form>
                     </CardBody>
