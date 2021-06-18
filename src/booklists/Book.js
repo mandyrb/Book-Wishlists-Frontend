@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
-import {Card, CardBody, CardTitle, CardText, CardImg, Button, Jumbotron, ListGroup, ListGroupItem} from "reactstrap";
+import {Card, CardBody, CardText, CardImg, Button, Jumbotron, ListGroup, ListGroupItem} from "reactstrap";
 import "./Book.css";
 import LoadingSpinner from "../LoadingSpinner";
 import { useParams, useHistory } from "react-router-dom";
@@ -86,11 +86,15 @@ function Book({removeBook, addBook, addList}){
                     <div key={list.id}>
                     {booklistIds.includes(list.id)?
                         <ListGroupItem className="on-list-title">{book.title} is currently on {list.name}   
-                            <Button className="add-remove-button" onClick={() => removeBookFromList(list.id)}>Remove</Button>
+                            <Button className="add-remove-button" onClick={(e) => {
+                                e.preventDefault();
+                                removeBookFromList(list.id);}}>Remove</Button>
                         </ListGroupItem>
                     :
                         <ListGroupItem className="on-list-title">{book.title} is not currently on {list.name}   
-                            <Button className="add-remove-button" onClick={() => addBookToList(list.id)}>Add</Button>
+                            <Button className="add-remove-button" onClick={(e) => {
+                                e.preventDefault();
+                                addBookToList(list.id);}}>Add</Button>
                         </ListGroupItem>
                     }
                     </div>

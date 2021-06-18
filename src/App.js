@@ -50,7 +50,6 @@ function App() {
   }
 
   async function getBooks(){
-    console.log("in getBooks function")
     if(!books){
       let result = await MyBooklistApi.bookSearch("fiction", getCurrentDate(), user.username);
       setBooks(result);
@@ -92,9 +91,9 @@ function App() {
   }
 
   async function deleteList(id){
-    let result = await MyBooklistApi.deleteBooklist(id, user.username);
-    console.log("in delete list function");
-    // getUserDetails(tokenFromLocalStorage);
+    await MyBooklistApi.deleteBooklist(id, user.username);
+    const tokenFromLocalStorage = localStorage.getItem("token");
+    getUserDetails(tokenFromLocalStorage);
   }
 
   function logoutUser(){
@@ -117,10 +116,6 @@ function App() {
       getUserDetails(tokenFromLocalStorage);
     }
   },[token]);
-
-      // useEffect(() => {
-    //     getBooks();
-    // }, []);
 
   return (
     <div className="App">

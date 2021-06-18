@@ -30,7 +30,9 @@ function BookList({deleteList}){
                 <div key={list.id}>
                 <h3>{list.name}</h3>
                 <h5>{list.description}</h5>
-                <Form onSubmit={() => handleSubmitList(list.id)}>
+                <Form onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSubmitList(list.id)}}>
                     <Button >Delete booklist</Button>
                 </Form>
                 <br></br>
@@ -40,7 +42,9 @@ function BookList({deleteList}){
                     <CardBody>
                         <CardTitle className="book-card-title">{book.title}</CardTitle>
                         <CardText>{book.author}</CardText>
-                        <Form onSubmit={() => handleSubmitBook(book)}>
+                        <Form onSubmit={(e) => {
+                            e.preventDefault();
+                            handleSubmitBook(book);}}>
                             <Button >View Book Details</Button>
                         </Form>
                     </CardBody>

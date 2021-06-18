@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {Jumbotron, Card, CardBody, CardTitle, CardText, Form, Button, ListGroup} from "reactstrap";
 import UserContext from "../UserContext";
 import BooksContext from "../BooksContext";
@@ -13,7 +13,6 @@ function UserHome({getBooks, getBooksWithSearch}){
     const history = useHistory(); 
 
     useEffect(() => {
-        console.log("in userhome useEffect");
         getBooks();
     }, []);
 
@@ -32,7 +31,7 @@ function UserHome({getBooks, getBooksWithSearch}){
                 </div>
             <Card>
                 <br></br>
-                <h1>Welcome back {user.firstName}!</h1>
+                <h1>Welcome {user.firstName}!</h1>
                 <br></br>
                 <p>Search for books from the New York Times bestsellers list by date</p>
                 <p>Or see below for the top 10 fiction books on the current bestsellers list</p>
@@ -46,7 +45,9 @@ function UserHome({getBooks, getBooksWithSearch}){
                         <CardBody>
                             <CardTitle className="book-card-title">{book.title}</CardTitle>
                             <CardText>{book.author}</CardText>
-                            <Form onSubmit={() => handleSubmit(book)}>
+                            <Form onSubmit={(e) => {
+                                e.preventDefault();
+                                handleSubmit(book);}}>
                                 <Button >View Book Details</Button>
                             </Form>
                         </CardBody>
