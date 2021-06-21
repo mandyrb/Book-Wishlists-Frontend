@@ -18,6 +18,10 @@ function NewBooklistForm({addList, book, isbn, bestsellersDate, type}){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(Object.values(formData).includes("")) {
+            setInvalidMessage("All fields are required");
+            return;
+        }
         let added = await addList(formData.name, formData.description, book, isbn, bestsellersDate, type);
         if (added === true){
             history.push('/booklists');

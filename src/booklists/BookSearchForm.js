@@ -1,29 +1,34 @@
 import React, {useState} from "react";
 import {Container, Form, FormGroup, Row, Col, Label, Input, Button} from "reactstrap";
 import { useHistory } from 'react-router-dom';
+import DatePicker from "react-datepicker"; 
+import "react-datepicker/dist/react-datepicker.css";
 
 function BookSearchForm({getBooksWithSearch}){
-    const initial_state = {date: "", type: "fiction"}
-    const [formData, setFormData] = useState(initial_state);
+    const [type, setType] = useState("fiction");
+    const [date, setDate] = useState(new Date());
     const [invalidMessage, setInvalidMessage] = useState(false); 
     const history = useHistory(); 
     
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(formData => ({
-            ...formData, 
-            [name]: value
-        }))
+        const { value } = e.target;
+        setType(type => (value));
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let search = await getBooksWithSearch(formData.type, formData.date);
-        if (search === true){
+        let formattedDate;
+        if(date){
             setInvalidMessage(false);
-            history.push('/');
+            // adapted from StackOverflow 6/18 https://stackoverflow.com/questions/43744312/react-js-get-current-date
+            formattedDate = `${date.getFullYear()}-${(date.getMonth()+1)<10?`0${(date.getMonth()+1)}`:`${(date.getMonth()+1)}`}-${(date.getDate())<10?`0${(date.getDate())}`:`${(date.getDate())}`}`;
         }
-        else setInvalidMessage("Make sure your date is in the correct format.");
+        else{
+            setInvalidMessage("You must enter a date to search by date");
+            return;
+        }
+        
+        await getBooksWithSearch(type, formattedDate);
     }
 
     return(
@@ -33,9 +38,14 @@ function BookSearchForm({getBooksWithSearch}){
                 <Col xs={10}>
                 <br></br>
                 <FormGroup>
-                <Label style={{marginBottom:"10px"}} htmlFor="date">Date (format: YYYY-MM-DD)</Label>
                 {invalidMessage && <h6>{invalidMessage}</h6>}
-                <Input type="text" name="date" id="date" onChange={handleChange}/>
+                <DatePicker
+                    selected={date}
+                    onChange={(date) => setDate(date)}
+                    minDate={new Date(2011, 2)}
+                    maxDate={new Date()}
+                    showDisabledMonthNavigation
+                />
                 </FormGroup>
                 <FormGroup tag="fieldset">
                 <FormGroup check>
