@@ -12,9 +12,13 @@ function UserHome({getBooks, getBooksWithSearch}){
     const books = useContext(BooksContext);
     const history = useHistory(); 
 
+    // Make sure there are books to show the user upon login
+
     useEffect(() => {
         getBooks();
     }, []);
+
+    // Direct user to view book detail page
 
     const handleSubmit = async (book) => {
         history.push(`/book/${book.isbn}`);
@@ -37,6 +41,11 @@ function UserHome({getBooks, getBooksWithSearch}){
                         If you'd like to search for more books, you can use the search form below, which goes back to 
                         March of 2011. The search will default to fiction, or you can select fiction or nonfiction. 
                         All data is provided by The New York Times.</p>
+                        {/* The following anchor tag can be used if the site develops further and has additional
+                        branding/logos on the page:
+                        <a href="https://developer.nytimes.com/" target="blank">
+                            <img src="https://developer.nytimes.com/files/poweredby_nytimes_65a.png?v=1583354208350" />
+                        </a> */}
                     <BookSearchForm getBooksWithSearch={getBooksWithSearch}/>
                 </Jumbotron>
                 </div>

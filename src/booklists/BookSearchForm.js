@@ -13,6 +13,8 @@ function BookSearchForm({getBooksWithSearch}){
         setType(type => (value));
     }
 
+    // Make API call to get books on desired date & for desired type
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         let formattedDate;

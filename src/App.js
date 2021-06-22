@@ -49,12 +49,16 @@ function App() {
     return `${year}-${month<10?`0${month}`:`${month}`}-${date}`
   }
 
+  // Get default list of books from NYT API for initial home view
+
   async function getBooks(){
     if(!books){
       let result = await MyBooklistApi.bookSearch("fiction", getCurrentDate(), user.username);
       setBooks(result);
     }
   }
+
+  // Get list of books when user enters search date and type
 
   async function getBooksWithSearch(type, date) {
     try{
@@ -109,6 +113,8 @@ function App() {
     let user = await MyBooklistApi.getUser(username);
     setUser(user);
   }
+
+  // Use token in local storage if user returns to same browser
 
   useEffect(() => {
     const tokenFromLocalStorage = localStorage.getItem("token");

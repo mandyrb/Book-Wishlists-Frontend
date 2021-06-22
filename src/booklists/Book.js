@@ -17,6 +17,10 @@ function Book({removeBook, addBook, addList}){
     let type, bestsellersDate;
     let booklistIds = [];
 
+    // Loop over the user's booklists and the books on those lists,
+    // to find which of those lists the selected book may be on & add id to booklistIds
+    // Also set the type and bestsellers date equal to that of the selected book
+
     for (let list of user.booklists){
         for(let book of list.books){
             if(book.isbn === isbn){
@@ -26,6 +30,9 @@ function Book({removeBook, addBook, addList}){
             }
         }
     }
+
+    // If the book isn't on one of the user's lists, set the type and bestsellers 
+    // date equalto that of the selected book
 
     if (booklistIds.length === 0){
         for(let book of books){
@@ -68,7 +75,12 @@ function Book({removeBook, addBook, addList}){
                 <br></br>
                 <p className="lead"> Below, check out detailed information about your selected book. If you like,
                     you can add or remove this book from one of your existing booklists, or
-                    create a new list for this book.</p>
+                    create a new list for this book. All data is provided by The New York Times.</p>
+                    {/* The following anchor tag can be used if the site develops further and has additional
+                    branding/logos on the page:
+                    <a href="https://developer.nytimes.com/" target="blank">
+                        <img src="https://developer.nytimes.com/files/poweredby_nytimes_65a.png?v=1583354208350" />
+                    </a> */}
                 <br></br>
             </Jumbotron>
             </div>

@@ -17,6 +17,8 @@ function LoginForm({loginUser}){
         }))
     }
 
+    // Handle login submission or provide error messaging
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         let login = await loginUser(formData.usernameLogin, formData.passwordLogin);

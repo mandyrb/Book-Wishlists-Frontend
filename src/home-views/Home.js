@@ -20,9 +20,12 @@ function Home({loginUser, signupUser}){
                 York Times Bestsellers Archive. Once you find a book you like, you 
                 can create a custom list for it, or add it to one or more lists you've 
                 already created. Whenever you're ready to get a new book, Book Wishlists 
-                will be here to help you remember all those great books you've been meaning to read!</p>
+                will be here to help you remember all those great books you've been meaning to read!
+                All data is provided by The New York Times.</p>
             <br></br>
-            {/* <a href="https://developer.nytimes.com/" target="blank">
+            {/* The following anchor tag can be used if the site develops further and has additional
+            branding/logos on the page:
+            <a href="https://developer.nytimes.com/" target="blank">
                 <img src="https://developer.nytimes.com/files/poweredby_nytimes_65a.png?v=1583354208350" />
             </a> */}
         </Jumbotron>

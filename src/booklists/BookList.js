@@ -8,9 +8,13 @@ function BookList({deleteList}){
     const user = useContext(UserContext);
     const history = useHistory(); 
 
+    // Direct user to view book detail page
+
     const handleSubmitBook = async (book) => {
         history.push(`/book/${book.isbn}`);
     }
+
+    // Allow user to delete a booklist
 
     const handleSubmitList = async (id) => {
         await deleteList(id);

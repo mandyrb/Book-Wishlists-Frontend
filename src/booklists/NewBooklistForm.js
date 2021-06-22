@@ -16,13 +16,14 @@ function NewBooklistForm({addList, book, isbn, bestsellersDate, type}){
         }))
     }
 
+    // Allow user to create a new booklist and manage empty inputs
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(Object.values(formData).includes("")) {
             setInvalidMessage("All fields are required");
             return;
         }
-        if(formData.description.length > 10) console.log("it's long")
         let added = await addList(formData.name, formData.description, book, isbn, bestsellersDate, type);
         if (added === true){
             history.push('/booklists');
@@ -35,7 +36,7 @@ function NewBooklistForm({addList, book, isbn, bestsellersDate, type}){
         <Form style={{marginLeft:"10vw"}} className="newBooklist-form" onSubmit={handleSubmit}>
             <Row>
                 <Col xs={10}>
-                <h3>Create a new list for this book:</h3>
+                <h3 style={{color:"black"}}>Create a new list for this book:</h3>
                 <br></br>
                 <FormGroup>
                 <Label style={{marginBottom:"10px"}} htmlFor="name">Name</Label>

@@ -17,6 +17,8 @@ function SignUpForm({signupUser}){
         }))
     }
 
+    // Handle user registration or provide error messaging
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(Object.values(formData).includes("")) {
