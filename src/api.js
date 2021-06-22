@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = process.env.REACT_APP_BOOKLIST_BASE_URL || "http://localhost:3001";
+const BASE_URL = "https://book-wishlists.herokuapp.com";
 
 // API Class - Static class tying together methods used to get/send to to the API.
 
