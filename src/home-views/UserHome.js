@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from "react";
-import {Jumbotron, Card, CardBody, CardTitle, CardText, Form, Button, ListGroup} from "reactstrap";
+import {Jumbotron, Card, CardBody, CardTitle, CardText, Form, Button, Container, Row, Col} from "reactstrap";
 import UserContext from "../UserContext";
 import BooksContext from "../BooksContext";
 import { useHistory } from 'react-router-dom';
@@ -24,28 +24,33 @@ function UserHome({getBooks, getBooksWithSearch}){
         return(
             <div>
                 <div>
-                <Jumbotron>
+                <Jumbotron className="home-jumbotron">
                     <h1 className="display-3">Book Wishlists</h1>
-                    <p className="lead">Content here about why the app is great</p>
+                    <br></br>
+                    <h4>Welcome {user.firstName}!</h4>
+                    <br></br>
+                    <h4>Time to find some great books!</h4>
+                    <br></br>
+                    <p className="lead">Below, you'll find ten fiction books from the current 
+                        New York Times bestsellers list. You can click on any book to view details about that book,
+                        and then you'll have the option to create a list for it, or to add or remove it from one of your existing lists. 
+                        If you'd like to search for more books, you can use the search form below, which goes back to 
+                        March of 2011. The search will default to fiction, or you can select fiction or nonfiction. 
+                        All data is provided by The New York Times.</p>
+                    <BookSearchForm getBooksWithSearch={getBooksWithSearch}/>
                 </Jumbotron>
                 </div>
-            <Card>
                 <br></br>
-                <h1>Welcome {user.firstName}!</h1>
-                <br></br>
-                <p>Search for books from the New York Times bestsellers list by date</p>
-                <p>Or see below for the top 10 fiction books on the current bestsellers list</p>
-                <BookSearchForm getBooksWithSearch={getBooksWithSearch}/>
-            </Card>
-            <br></br>
-                <ListGroup className = "booklists-list">
+                <Container >
+                <Row xs="2" md="4">
                     {books.map(book => (
-                    <div key={book.isbn}>
+                    <Col key={book.isbn}>
+                    <div>
                         <Card className = "book-card">
                         <CardBody>
                             <CardTitle className="book-card-title">{book.title}</CardTitle>
                             <CardText>{book.author}</CardText>
-                            <Form onSubmit={(e) => {
+                            <Form  onSubmit={(e) => {
                                 e.preventDefault();
                                 handleSubmit(book);}}>
                                 <Button >View Book Details</Button>
@@ -53,10 +58,13 @@ function UserHome({getBooks, getBooksWithSearch}){
                         </CardBody>
                         </Card>
                     </div>
+                    </Col>
                     ))}
-                </ListGroup>
+                </Row>
+                </Container>
             </div>
         )
 }
 
 export default UserHome;
+

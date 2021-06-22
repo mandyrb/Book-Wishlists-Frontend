@@ -22,6 +22,7 @@ function NewBooklistForm({addList, book, isbn, bestsellersDate, type}){
             setInvalidMessage("All fields are required");
             return;
         }
+        if(formData.description.length > 10) console.log("it's long")
         let added = await addList(formData.name, formData.description, book, isbn, bestsellersDate, type);
         if (added === true){
             history.push('/booklists');
@@ -31,9 +32,10 @@ function NewBooklistForm({addList, book, isbn, bestsellersDate, type}){
 
     return(
         <Container>
-        <Form className="newBooklist-form" onSubmit={handleSubmit}>
+        <Form style={{marginLeft:"10vw"}} className="newBooklist-form" onSubmit={handleSubmit}>
             <Row>
                 <Col xs={10}>
+                <h3>Create a new list for this book:</h3>
                 <br></br>
                 <FormGroup>
                 <Label style={{marginBottom:"10px"}} htmlFor="name">Name</Label>
@@ -46,7 +48,7 @@ function NewBooklistForm({addList, book, isbn, bestsellersDate, type}){
                 </FormGroup>
                 <br></br>
                 <FormGroup>
-                <Button color="primary">Submit</Button>
+                <Button color="secondary">Submit</Button>
                 </FormGroup>
                 <br></br>
                 {invalidMessage && <h6>{invalidMessage}</h6>}

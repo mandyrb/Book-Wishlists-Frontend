@@ -56,8 +56,6 @@ function SignUpForm({signupUser}){
                 </FormGroup>
                 <br></br>
                 {invalidMessage && <h6>{invalidMessage}</h6>}
-                <br></br>
-                <br></br>
                 </Col>
             </Row>
         </Form>

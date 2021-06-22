@@ -28,7 +28,6 @@ function Routes({loginUser, signupUser, removeBook, addBook, getBooks, addList, 
                 }
             </Route>
             <Route exact path="/book/:isbn" >
-            {/* <Route exact path="/book/:type/:date/:isbn" > */}
                 {user ? 
                 <Book removeBook={removeBook} addBook={addBook} addList={addList}/> 
                 :

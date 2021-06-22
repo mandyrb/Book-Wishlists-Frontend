@@ -63,8 +63,13 @@ function Book({removeBook, addBook, addList}){
     return(
         <div>
             <div>
-            <Jumbotron>
+            <Jumbotron className="book-jumbotron">
                 <h1 className="display-3">Book Wishlists</h1>
+                <br></br>
+                <p className="lead"> Below, check out detailed information about your selected book. If you like,
+                    you can add or remove this book from one of your existing booklists, or
+                    create a new list for this book.</p>
+                <br></br>
             </Jumbotron>
             </div>
             <Card className = "book">
@@ -103,9 +108,8 @@ function Book({removeBook, addBook, addList}){
             </Card>
             <br></br>
             <br></br>
-            <Card>
+            <Card className="new-booklist-form">
             <br></br>
-            <h3>Create a new booklist for this book:</h3>
             <br></br>
             <NewBooklistForm addList={addList} book={book} isbn={isbn} bestsellersDate={bestsellersDate} type={type}></NewBooklistForm>
             </Card>

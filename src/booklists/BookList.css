@@ -11,3 +11,29 @@
 .book-card-title {
 	font-weight: bold;
 }
+
+.booklist-jumbotron {
+	color: white;
+	margin: auto;
+	padding-top: 20px;
+	width: 70vw;
+}
+
+.lead {
+	text-align: justify;
+}
+
+.new-booklist-form {
+	margin: auto;
+	width: 70vw;
+}
+
+h3 {
+	overflow-wrap: break-word;
+	color: white;
+}
+
+h5 {
+	overflow-wrap: break-word;
+	color: white;
+}

@@ -6,6 +6,8 @@
 
 .books-on-lists {
 	text-align: left;
+	width: 50vw;
+	margin: auto;
 }
 
 .add-remove-button {
@@ -15,4 +17,20 @@
 
 .on-list-title {
 	padding-bottom: 2vw;
+}
+
+.book-jumbotron {
+	color: white;
+	margin: auto;
+	padding-top: 20px;
+	width: 70vw;
+}
+
+.book {
+	width: 70vw;
+	margin: auto;
+}
+
+.lead {
+	text-align: justify;
 }
