@@ -17,7 +17,7 @@ function Home({loginUser, signupUser}){
             <br></br>
             <p className="lead"> Book Wishlists
                 is a resource for finding high quality books, by searching the New 
-                York Times Bestsellers Archive. Once you find a book you like, you 
+                York Times Bestsellers lists. Once you find a book you like, you 
                 can create a custom list for it, or add it to one or more lists you've 
                 already created. Whenever you're ready to get a new book, Book Wishlists 
                 will be here to help you remember all those great books you've been meaning to read!
