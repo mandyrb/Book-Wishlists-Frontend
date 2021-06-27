@@ -1,4 +1,4 @@
-# Book Wishlists - Backend
+# Book Wishlists - Frontend
 
 [Deployed using Surge](https://nostalgic-yard.surge.sh/)
 
