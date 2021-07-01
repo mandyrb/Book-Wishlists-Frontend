@@ -46,7 +46,7 @@ function App() {
     let date = newDate.getDate();
     let month = newDate.getMonth() + 1;
     let year = newDate.getFullYear();
-    return `${year}-${month<10?`0${month}`:`${month}`}-${date}`
+    return `${year}-${month<10?`0${month}`:`${month}`}-${date<10?`0${date}`:`${date}`}`
   }
 
   // Get default list of books from NYT API for initial home view
