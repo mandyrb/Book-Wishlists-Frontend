@@ -51,7 +51,7 @@ function UserHome({getBooks, getBooksWithSearch}){
                 </div>
                 <br></br>
                 <Container >
-                <Row xs="2" md="4">
+                <Row xs="1" sm="2" lg="3">
                     {books.map(book => (
                     <Col key={book.isbn}>
                     <div>

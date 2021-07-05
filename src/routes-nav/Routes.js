@@ -6,7 +6,7 @@ import Book from "../booklists/Book";
 import React, {useContext} from "react";
 import UserContext from "../UserContext";
 
-function Routes({loginUser, signupUser, removeBook, addBook, getBooks, addList, getBooksWithSearch, deleteList}){
+function Routes({loginUser, signupUser, removeBook, addBook, getBooks, addList, addBookAndList, getBooksWithSearch, deleteList}){
     const user = useContext(UserContext);
 
     return(
@@ -22,14 +22,14 @@ function Routes({loginUser, signupUser, removeBook, addBook, getBooks, addList, 
             </Route>
             <Route exact path="/booklists" >
                 {user ? 
-                <BookList deleteList={deleteList}/>
+                <BookList deleteList={deleteList} addList={addList}/>
                 :
                 <Redirect to="/" />
                 }
             </Route>
             <Route exact path="/book/:isbn" >
                 {user ? 
-                <Book removeBook={removeBook} addBook={addBook} addList={addList}/> 
+                <Book removeBook={removeBook} addBook={addBook} addBookAndList={addBookAndList}/> 
                 :
                 <Redirect to="/" />
                 }

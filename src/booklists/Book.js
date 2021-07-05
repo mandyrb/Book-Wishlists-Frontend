@@ -8,7 +8,7 @@ import NewBooklistForm from "./NewBooklistForm";
 import UserContext from "../UserContext";
 import BooksContext from "../BooksContext";
 
-function Book({removeBook, addBook, addList}){
+function Book({removeBook, addBook, addBookAndList}){
     const user = useContext(UserContext);
     const books = useContext(BooksContext);
     const history = useHistory(); 
@@ -103,12 +103,14 @@ function Book({removeBook, addBook, addList}){
                     <div key={list.id}>
                     {booklistIds.includes(list.id)?
                         <ListGroupItem className="on-list-title">{book.title} is currently on {list.name}   
+                            <br></br>
                             <Button className="add-remove-button" onClick={(e) => {
                                 e.preventDefault();
                                 removeBookFromList(list.id);}}>Remove</Button>
                         </ListGroupItem>
                     :
-                        <ListGroupItem className="on-list-title">{book.title} is not currently on {list.name}   
+                        <ListGroupItem className="on-list-title">{book.title} is not currently on {list.name}  
+                            <br></br> 
                             <Button className="add-remove-button" onClick={(e) => {
                                 e.preventDefault();
                                 addBookToList(list.id);}}>Add</Button>
@@ -122,8 +124,9 @@ function Book({removeBook, addBook, addList}){
             <br></br>
             <Card className="new-booklist-form">
             <br></br>
+            <h3 style={{color:"black", margin:"10px"}}>Create a new list for this book:</h3>
             <br></br>
-            <NewBooklistForm addList={addList} book={book} isbn={isbn} bestsellersDate={bestsellersDate} type={type}></NewBooklistForm>
+            <NewBooklistForm addBookAndList={addBookAndList} book={book} isbn={isbn} bestsellersDate={bestsellersDate} type={type}></NewBooklistForm>
             </Card>
             <br></br>
         </div>

@@ -13,7 +13,7 @@ function Home({loginUser, signupUser}){
             <br></br>
             <h4>Do you have a hard time finding books 
                 you want to read?</h4>
-            <h4> Book Wislists is made for you!</h4>
+            <h4> Book Wishlists is made for you!</h4>
             <br></br>
             <p className="lead"> Book Wishlists
                 is a resource for finding high quality books, by searching the New 
@@ -32,15 +32,16 @@ function Home({loginUser, signupUser}){
         </div>
         <Container>
             <Row>
-            <Col xs="6">
+            <Col md="6">
             <Card className="card">
                 <CardBody>
                 <h1> Login for Existing Users</h1>
                 <LoginForm loginUser={loginUser}/>
                 </CardBody>
             </Card>
+            <br></br>
             </Col>
-            <Col xs="6">
+            <Col md="6">
             <Card className="card">
                 <CardBody>
                 <h1> Signup for New Users</h1>

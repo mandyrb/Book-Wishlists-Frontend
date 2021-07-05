@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Container, Form, FormGroup, Row, Col, Label, Input, Button} from "reactstrap";
 import { useHistory } from 'react-router-dom';
 
-function NewBooklistForm({addList, book, isbn, bestsellersDate, type}){
+function NewBooklistForm({addBookAndList, addList, book=null, isbn=null, bestsellersDate=null, type=null}){
     const initial_state = {name: "", description: ""}
     const [formData, setFormData] = useState(initial_state);
     const [invalidMessage, setInvalidMessage] = useState(false); 
@@ -24,11 +24,17 @@ function NewBooklistForm({addList, book, isbn, bestsellersDate, type}){
             setInvalidMessage("All fields are required");
             return;
         }
-        let added = await addList(formData.name, formData.description, book, isbn, bestsellersDate, type);
-        if (added === true){
+        if(book){
+            let added = await addBookAndList(formData.name, formData.description, book, isbn, bestsellersDate, type);
+            if (added === true){
+                history.push('/booklists');
+            }
+            else setInvalidMessage(added[0]);
+        }
+        else{
+            await addList(formData.name, formData.description);
             history.push('/booklists');
         }
-        else setInvalidMessage(added[0]);
     }
 
     return(
@@ -36,7 +42,6 @@ function NewBooklistForm({addList, book, isbn, bestsellersDate, type}){
         <Form style={{marginLeft:"10vw"}} className="newBooklist-form" onSubmit={handleSubmit}>
             <Row>
                 <Col xs={10}>
-                <h3 style={{color:"black"}}>Create a new list for this book:</h3>
                 <br></br>
                 <FormGroup>
                 <Label style={{marginBottom:"10px"}} htmlFor="name">Name</Label>

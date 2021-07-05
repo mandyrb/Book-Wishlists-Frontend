@@ -83,7 +83,7 @@ function App() {
     getUserDetails(tokenFromLocalStorage);
   }
 
-  async function addList(name, description, book, isbn, bestsellersDate, type){
+  async function addBookAndList(name, description, book, isbn, bestsellersDate, type){
     try{
       let booklistId = (await MyBooklistApi.addBooklist(name, description, user.username)).id;
       await addBook(isbn, book.title, book.author, bestsellersDate, type, booklistId, user.username);
@@ -92,6 +92,12 @@ function App() {
     catch (e){
       return e;
     }
+  }
+
+  async function addList(name, description){
+    await MyBooklistApi.addBooklist(name, description, user.username);
+    const tokenFromLocalStorage = localStorage.getItem("token");
+    getUserDetails(tokenFromLocalStorage);
   }
 
   async function deleteList(id){
@@ -130,8 +136,8 @@ function App() {
       <BooksContext.Provider value={books}>
       <NavBar logoutUser={logoutUser}/>
       <Routes user={user} signupUser = {signupUser} loginUser={loginUser} 
-            removeBook={removeBook} addBook={addBook} deleteList={deleteList}
-            getBooks={getBooks} addList={addList} getBooksWithSearch={getBooksWithSearch}/>
+            removeBook={removeBook} addBook={addBook} deleteList={deleteList} addList={addList}
+            getBooks={getBooks} addBookAndList={addBookAndList} getBooksWithSearch={getBooksWithSearch}/>
       </BooksContext.Provider>
       </UserContext.Provider>
       </BrowserRouter>
