@@ -1,6 +1,6 @@
 # Book Wishlists - Frontend
 
-[Deployed using Surge](https://able-mind.surge.sh/)
+[Deployed using Surge](http://unwritten-straw.surge.sh/)
 
 **Book Wishlists** is a web application for creating custom booklists, based on searches of the New York Times Bestsellers lists. This repository includes the frontend for the application; the backend repository can be found [here](https://github.com/mandyrb/book-wishlist-backend). The purpose of this web app is to provide a convenient and efficient way for users to search for popular books and create lists of books they're interested in reading, to reference later when they're ready to read a new book.
 
